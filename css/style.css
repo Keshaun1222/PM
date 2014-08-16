@@ -1,0 +1,21 @@
+.breadcrumbs {
+	margin-top: -20px;
+	background-color: #FCFCFC;
+	border-bottom: 1px solid #eee;
+	padding: 10px 70px 6px;
+	overflow: hidden;
+	margin-bottom: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.breadcrumbs h1 {
+	font-size: 26px;
+	color: #000541;
+	margin-top: 10px;
+}
+.breadcrumb {
+	top: 10px;
+	padding-right: 0;
+	background: none;
+	position: relative;
+}
