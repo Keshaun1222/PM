@@ -1,0 +1,20 @@
+<?php
+	// Environment Variables
+	$env = "dev";
+	$reporting = ($env == "prod" ? 0 : "E_ALL");
+	
+	// Database Information
+	$host = "localhost";
+	$user = "sample";
+	$pass = "sample";
+	$base = "sample";
+	
+	// Tables
+	$tables["deposits"] = "deposits";
+	$tables["planets"] = "planets";
+	$tables["resources"] = "rm";
+	$tables["sectors"] = "sectors";
+	$tables["systems"] = "systems";
+	
+	// Combine Info
+	$start = strtotime("December 3 1998");
