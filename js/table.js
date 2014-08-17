@@ -1,3 +1,6 @@
 $(document).ready(function(){
-	$(".row div").height($(this.width()));
+	$(".col-md-1").height($(".col-md-1").width());
+	$(window).resize(function() {
+		$(".col-md-1").height($(".col-md-1").width());
+	});
 });

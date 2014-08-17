@@ -165,7 +165,7 @@ Breadcrumb;
 Body;
 	}
 	
-	function foot($table = true) {
+	function foot($table = false) {
 		echo <<<Foot
 	</div>
 	<div class="footer">
