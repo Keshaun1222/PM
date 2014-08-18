@@ -56,4 +56,6 @@ function showDeposits(plan) {
 	}
 	xmlhttp.open("GET", "deposits.php?planet=" + plan, true);
 	xmlhttp.send();
+	var size = $(".col").width();
+	document.getElementsByClassName("col").style.height = size;
 }

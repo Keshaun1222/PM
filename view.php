@@ -32,7 +32,7 @@ Option;
 			</div>
 		</div>
 	</form>
-	<div id="display">
+	<div id="display" style="margin-top: 20px;">
 	</div>
 <?php
 	foot(true);
