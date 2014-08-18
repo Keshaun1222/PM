@@ -92,23 +92,9 @@ Head;
 					</li>
 Head;
 		}
-		if ($page == "About") {
-			echo <<<Head
-					<li class="active">
-						<a href="about.php">About</a>
-					</li>
-Head;
-		}
-		else {
-			echo <<<Head
-					<li>
-						<a href="about.php">About</a>
-					</li>
-Head;
-		}
 		echo <<< Head
 				<li>
-					<a href="https://github.com/keshaun1222/ProspectingManager">GitHub</a>
+					<a href="https://github.com/keshaun1222/PM">GitHub</a>
 				</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -188,5 +174,4 @@ Foot;
 </html>
 Foot;
 	}
-	$mysqli->close();
 ?>
