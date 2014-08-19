@@ -15,7 +15,7 @@ HT;
 		<tr>	
 Table;
 			for ($i = 0; $i < $result["size"]; $i++) {
-				$deposits = $mysqli->query("SELECT t.img as Terrain, r.img as RM, d.amount as Amount, r.name as RName, d.x as X, d.y as Y FROM {$tables["deposits"]} d INNER JOIN {$tables["resources"]} r ON d.rm = r.id INNER JOIN {$tables["terrain"]} t ON d.terrain = t.id WHERE d.planet = {$planet} AND d.x = {$i} AND d.y = {$j}");
+				$deposits = $mysqli->query("SELECT d.id as ID, t.img as Terrain, r.img as RM, d.amount as Amount, r.name as RName, d.x as X, d.y as Y FROM {$tables["deposits"]} d INNER JOIN {$tables["resources"]} r ON d.rm = r.id INNER JOIN {$tables["terrain"]} t ON d.terrain = t.id WHERE d.planet = {$planet} AND d.x = {$i} AND d.y = {$j}");
 				if ($deposits->num_rows != 0) {
 					$deposit = $deposits->fetch_array();
 					$amount = number_format($deposit["Amount"]);
@@ -39,6 +39,7 @@ Table;
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" onclick="window.location='edit.php?deposit={$deposit["ID"]}'">Edit Deposit</button>
 						</div>
 					</div>
 				</div>

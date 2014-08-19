@@ -16,8 +16,6 @@
 	$tables["terrain"] = "terrain";
 	$tables["sectors"] = "sector";
 	$tables["systems"] = "systems";
-	$tables["users"] = "users";
-	
 	
 	// Combine Info
 	$start = strtotime("December 3 1998");

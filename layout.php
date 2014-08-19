@@ -10,7 +10,7 @@
 	error_reporting($reporting);
 	date_default_timezone_set("America/Phoenix");
 	
-	function head($page = "Home", $table = false) {
+	function head($page = "Home") {
 		$diff = time() - strtotime("December 3 1998");
 		$years = floor($diff / (60 * 60 * 24 * 365));
 		$days = floor($diff / (60 * 60 * 24)) - ($years * 365);
@@ -26,17 +26,12 @@
 	<title>Prospecting Manager</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/style.css" rel="stylesheet" />
+	<link href="css/form.css" rel="stylesheet" />
 	<link href="css/footer.css" rel="stylesheet" />
-Head;
-		if ($table) {
-			echo <<<Head
 	<link href="css/table.css" rel="stylesheet" />
-Head;
-		}
-		echo <<<Head
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -128,33 +123,35 @@ Head;
 	function breadcrumb($page = "Home", $section = "None") {
 		echo <<<Breadcrumb
 	<div class="breadcrumbs">
-		<h1 class="pull-left">{$page}</h1>
-		<ol class="breadcrumb pull-right">
+		<div class="container">
+			<h1 class="pull-left">{$page}</h1>
+			<ol class="breadcrumb pull-right">
 Breadcrumb;
 		if ($page == "Home") {
 			echo <<<Home
-			<li class="active">Home</li>
+				<li class="active">Home</li>
 Home;
 		}
 		else {
 			if ($section == "None") {
 				echo <<<Page
-			<li><a href="index.php">Home</a></li>
-			<li class="active">{$page}</li>
+				<li><a href="index.php">Home</a></li>
+				<li class="active">{$page}</li>
 Page;
 			}
 			else {
 				$pagename = strtolower($page) . ".php";
 				echo <<<Section
-			<li><a href="index.php">Home</a></li>
-			<li><a href="{$pagename}">{$page}</a></li>
-			<li class="active">{$section}</a></li>
+				<li><a href="index.php">Home</a></li>
+				<li><a href="{$pagename}">{$page}</a></li>
+				<li class="active">{$section}</a></li>
 Section;
 			}
 		}
 		
 			echo <<<Breadcrumb
-		</ol>
+			</ol>
+		</div>
 	</div>
 Breadcrumb;
 	}
@@ -165,7 +162,7 @@ Breadcrumb;
 Body;
 	}
 	
-	function foot($table = false) {
+	function foot() {
 		echo <<<Foot
 	</div>
 	<div class="footer">
@@ -177,13 +174,7 @@ Body;
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 	<script type="text/javascript" src="js/functions.js"></script>
-Foot;
-		if ($table) {
-			echo <<<Foot
 	<script type="text/javascript" src="js/table.js"></script>
-Foot;
-		}
-		echo <<<Foot
 </body>
 </html>
 Foot;

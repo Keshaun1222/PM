@@ -1,8 +1,11 @@
+body {
+	padding-top: 70px;
+}
 .breadcrumbs {
 	margin-top: -20px;
 	background-color: #FCFCFC;
 	border-bottom: 1px solid #eee;
-	padding: 10px 70px 6px;
+	padding: 10px 0px 6px;
 	overflow: hidden;
 	margin-bottom: 20px;
 	margin-left: auto;
@@ -10,7 +13,7 @@
 }
 .breadcrumbs h1 {
 	font-size: 26px;
-	color: #000541;
+	color: #000580;
 	margin-top: 10px;
 }
 .breadcrumb {
