@@ -12,28 +12,64 @@ Table;
 		<tr>	
 Table;
 			for ($i = 0; $i < $result["size"]; $i++) {
-				if ($i == 0) {
-					if ($j == 0) {
-						echo <<<Table
+				if ($j == 0) {
+					if ($i == 0) {
+						$deposits = $mysqli->query("SELECT t.img as Terrain, r.img as RM FROM {$tables["deposits"]} d INNER JOIN {$tables["resources"]} r ON d.rm = r.id INNER JOIN {$tables["terrain"]} t ON d.terrain = t.id WHERE d.planet = {$planet} AND d.x = {$i} AND d.y = {$j}");
+						if ($deposits->num_rows() != 0) {
+							$deposit = $deposits->fetch_array();
+							echo <<<Table
+			<td class="col col-first rows row-first" title="{$i},{$j}" style="background-image:url('img/{$deposit["Terrain"]}'); background-size: 100% 100%;"><img src="img/{$deposit["RM"]}" /></td>
+Table;
+						}
+						else {
+							echo <<<Table
 			<td class="col col-first rows row-first" title="{$i},{$j}"></td>
 Table;
+						}
 					}
 					else {
-						echo <<<Table
-			<td class="col col-first rows" title="{$i},{$j}"></td>
+						$deposits = $mysqli->query("SELECT t.img as Terrain, r.img as RM FROM {$tables["deposits"]} d INNER JOIN {$tables["resources"]} r ON d.rm = r.id INNER JOIN {$tables["terrain"]} t ON d.terrain = t.id WHERE d.planet = {$planet} AND d.x = {$i} AND d.y = {$j}");
+						if ($deposits->num_rows() != 0) {
+							$deposit = $deposits->fetch_array();
+							echo <<<Table
+			<td class="col rows row-first" title="{$i},{$j}" style="background-image:url('img/{$deposit["Terrain"]}'); background-size: 100% 100%;"><img src="img/{$deposit["RM"]}" /></td>
 Table;
+						}
+						else {
+							echo <<<Table
+			<td class="col rows row-first" title="{$i},{$j}"></td>
+Table;
+						}
 					}
 				}
 				else {
-					if ($j == 0) {
-						echo <<<Table
-			<td class="col rows row-first" title="{$i},{$j}"></td>
+					if ($i == 0) {
+						$deposits = $mysqli->query("SELECT t.img as Terrain, r.img as RM FROM {$tables["deposits"]} d INNER JOIN {$tables["resources"]} r ON d.rm = r.id INNER JOIN {$tables["terrain"]} t ON d.terrain = t.id WHERE d.planet = {$planet} AND d.x = {$i} AND d.y = {$j}");
+						if ($deposits->num_rows() != 0) {
+							$deposit = $deposits->fetch_array();
+							echo <<<Table
+			<td class="col rows col-first" title="{$i},{$j}" style="background-image:url('img/{$deposit["Terrain"]}'); background-size: 100% 100%;"><img src="img/{$deposit["RM"]}" /></td>
 Table;
+						}
+						else {
+							echo <<<Table
+			<td class="col rows col-first" title="{$i},{$j}"></td>
+Table;
+						}
 					}
 					else {
-						echo <<<Table
+						$deposits = $mysqli->query("SELECT t.img as Terrain, r.img as RM FROM {$tables["deposits"]} d INNER JOIN {$tables["resources"]} r ON d.rm = r.id INNER JOIN {$tables["terrain"]} t ON d.terrain = t.id WHERE d.planet = {$planet} AND d.x = {$i} AND d.y = {$j}");
+						if ($deposits->num_rows() != 0) {
+							$deposit = $deposits->fetch_array();
+							echo <<<Table
+			<td class="col rows" title="{$i},{$j}" style="background-image:url('img/{$deposit["Terrain"]}'); background-size: 100% 100%;"><img src="img/{$deposit["RM"]}" /></td>
+Table;
+						}
+						else {
+							echo <<<Table
 			<td class="col rows" title="{$i},{$j}"></td>
 Table;
+						}
 					}
 				}
 			}
