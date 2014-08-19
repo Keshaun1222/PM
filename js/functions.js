@@ -1,6 +1,6 @@
-function selectSystems(sect) {
-	if (sect == "") {
-		document.getElementById("system").innerHTML="";
+function showDeposits(plan) {
+	if (plan == "") {
+		document.getElementById("display").innerHTML="";
 		return;
 	} 
 	if (window.XMLHttpRequest) {
@@ -11,14 +11,15 @@ function selectSystems(sect) {
 	}
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			document.getElementById("system").innerHTML = xmlhttp.responseText;
+			document.getElementById("display").innerHTML = xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("GET", "systems.php?sector=" + sect, true);
+	xmlhttp.open("GET", "deposits.php?planet=" + plan, true);
 	xmlhttp.send();
 }
 
 function selectPlanets(sys) {
+	showDeposits("");
 	if (sys == "") {
 		document.getElementById("planet").innerHTML="";
 		return;
@@ -38,9 +39,10 @@ function selectPlanets(sys) {
 	xmlhttp.send();
 }
 
-function showDeposits(plan) {
-	if (plan == "") {
-		document.getElementById("display").innerHTML="";
+function selectSystems(sect) {
+	selectPlanets("");
+	if (sect == "") {
+		document.getElementById("system").innerHTML="";
 		return;
 	} 
 	if (window.XMLHttpRequest) {
@@ -51,11 +53,9 @@ function showDeposits(plan) {
 	}
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			document.getElementById("display").innerHTML = xmlhttp.responseText;
+			document.getElementById("system").innerHTML = xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("GET", "deposits.php?planet=" + plan, true);
+	xmlhttp.open("GET", "systems.php?sector=" + sect, true);
 	xmlhttp.send();
-	var size = $(".col").width();
-	document.getElementsByClassName("col").style.height = size;
 }

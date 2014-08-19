@@ -17,18 +17,15 @@
 .row-none {
 	border: 0px;
 }
-.col {
+td {
 	border-right: 1px solid black !important;
+	border-bottom: 1px solid black !important;
 	text-align: center;
-	vertical-align: middle;
-	padding: 0px;
+	vertical-align: middle !important;
 }
-.col-first {
+td:first-child {
 	border-left: 1px solid black !important;
 }
-.rows {
-	border-bottom: 1px solid black !important;
-}
-.row-first {
+tr:first-child > td {
 	border-top: 1px solid black !important;
 }

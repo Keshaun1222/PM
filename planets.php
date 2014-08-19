@@ -5,7 +5,7 @@
 	$query = $mysqli->query("SELECT * FROM {$tables["planets"]} WHERE system = {$system}");
 	
 	echo <<<Option
-	<option value="">Select a System</option>
+	<option value="">Select a Planet</option>
 Option;
 
 	while ($result = $query->fetch_array()) {

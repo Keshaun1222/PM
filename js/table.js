@@ -1,6 +1,6 @@
 $(document).ready(function(){
-	$(".col").height($(".col").width());
+	$("td").height($("td").width());
 	$(window).resize(function() {
-		$(".col").height($(".col").width());
+		$("td").height($("td").width());
 	});
 });
