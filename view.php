@@ -1,8 +1,8 @@
 <?php
 	include("layout.php");
 	
-	head("View Deposit", true);
-	breadcrumb();
+	head("View", true);
+	breadcrumb("View Deposit");
 	body();
 ?>
 	<form>

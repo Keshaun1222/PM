@@ -53,7 +53,7 @@ Head;
 			if ($page == "Home") {
 			echo <<<Head
 					<li class="active">
-						<a href="index.php">Home</a>
+						<a href="#">Home</a>
 					</li>
 Head;
 		}
@@ -64,10 +64,24 @@ Head;
 					</li>
 Head;
 		}
-		if ($page == "Add") {
+		if ($page == "AddP") {
 			echo <<<Head
 					<li class="active">
-						<a href="new.php">Add Deposit</a>
+						<a href="#">Add Planet</a>
+					</li>
+Head;
+		}
+		else {
+			echo <<<Head
+					<li>
+						<a href="add.php">Add Planet</a>
+					</li>
+Head;
+		}
+		if ($page == "AddD") {
+			echo <<<Head
+					<li class="active">
+						<a href="#">Add Deposit</a>
 					</li>
 Head;
 		}
@@ -81,7 +95,7 @@ Head;
 		if ($page == "View") {
 			echo <<<Head
 					<li class="active">
-						<a href="view.php">View Deposits</a>
+						<a href="#">View Deposits</a>
 					</li>
 Head;
 		}

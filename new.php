@@ -1,0 +1,2 @@
+<?php
+	include("layout.php");
