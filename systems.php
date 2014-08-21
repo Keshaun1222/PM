@@ -1,15 +1,18 @@
 <?php
-	include("layout.php");
+	require("layout.php");
+	require("lib/sector.class.php");
 	
-	$sector = $_GET["sector"];
-	$query = $mysqli->query("SELECT * FROM {$tables["systems"]} WHERE sector = {$sector}");
+	$sector = new Sector;
+	$sector->get($_GET["sector"]);
+	
+	$systems = $sector->getSystems();
+	$count = count($systems);
 	
 	echo <<<Option
 	<option value="">Select a System</option>
 Option;
-
-	while ($result = $query->fetch_array()) {
-		echo <<<Option
-	<option value="{$result["id"]}">{$result["name"]}</option>
-Option;
-	} 
+	
+	for ($i = 0; $i < $count; $i++) {
+		echo $systems[$i]->listOption();
+	}
+?>

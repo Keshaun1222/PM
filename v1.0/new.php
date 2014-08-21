@@ -1,6 +1,5 @@
 <?php
-	require("layout.php");
-	require("lib/others.class.php");
+	include("layout.php");
 	
 	head("AddD");
 	breadcrumb("Add Deposit");
@@ -54,16 +53,7 @@ Alert;
 Alert;
 		}
 		else {
-			//require("lib/deposit.class.php");
-			$amount = (int) $amount;
-			$rm = (int) $rm;
-			$planet = (int) $planet;
-			$terrain = (int) $terrain;
-			$x = (int) $x;
-			$y = (int) $y;
-			
-			$deposit = new Deposit;
-			$deposit->createDeposit($amount, $rm, $planet, $terrain, $x, $y);
+			$insert = $mysqli->query("INSERT INTO {$tables["deposits"]} VALUES (NULL, {$amount}, {$rm}, {$planet}, {$terrain}, {$x}, {$y})");
 			echo <<<Alert
 			<div class="alert alert-success alert-dismissible" role="alert">
 				<button type="button" class="close" data-dismiss="alert">
@@ -80,11 +70,11 @@ Alert;
 		<select name="sector" class="form-control" onchange="selectSystem(this.value)" autofocus>
 			<option value="">Select a Sector</option>
 			<?php
-				$sectors = Others::allSectors();
-				$count = count($sectors);
-				
-				for ($i = 0; $i < $count; $i++) {
-					echo $sectors[$i]->listOption();
+				$query = $mysqli->query("SELECT * FROM `{$tables["sectors"]}` ORDER BY `name`");
+				while ($result = $query->fetch_array()) {
+					echo <<<Option
+			<option value="{$result["id"]}">{$result["name"]}</option>
+Option;
 				}
 			?>
 		</select>
@@ -104,22 +94,22 @@ Alert;
 		<select name="rm" class="form-control o">
 			<option value="">Select a Resource Type</option>
 			<?php
-				$rms = Others::allRMs();
-				$count = count($rms);
-				
-				for ($i = 0; $i < $count; $i++) {
-					echo $rms[$i]->listOption();
+				$query = $mysqli->query("SELECT * FROM `{$tables["resources"]}` ORDER BY `name`");
+				while ($result = $query->fetch_array()) {
+					echo <<<Option
+			<option value="{$result["id"]}">{$result["name"]}</option>
+Option;
 				}
 			?>
 		</select>
 		<select name="terrain" class="form-control">
 			<option value="">Select a Terrain</option>
 			<?php
-				$terrains = Others::allTerrains();
-				$count = count($terrains);
-				
-				for ($i = 0; $i < $count; $i++) {
-					echo $terrains[$i]->listOption();
+				$query = $mysqli->query("SELECT * FROM `{$tables["terrain"]}` ORDER BY `name`");
+				while ($result = $query->fetch_array()) {
+					echo <<<Option
+			<option value="{$result["id"]}">{$result["name"]}</option>
+Option;
 				}
 			?>
 		</select>

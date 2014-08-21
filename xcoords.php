@@ -1,10 +1,10 @@
 <?php
-	include("layout.php");
+	require("layout.php");
+	require("lib/system.class.php");
 	
-	$planet = $_GET["planet"];
-	$query = $mysqli->query("SELECT size FROM {$tables["planets"]} WHERE id = {$planet}");
-	$result = $query->fetch_array();
-	$size = $result["size"];
+	$planet = new Planet;
+	$planet->get($_GET["planet"]);
+	$size = $planet->getSize();
 	
 	echo <<<Option
 	<option value="">Select a X-Coordinate</option>

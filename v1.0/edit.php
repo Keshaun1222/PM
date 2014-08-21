@@ -53,17 +53,6 @@ Alert;
 			</div>
 Alert;
 		}
-		else if(!is_int($planet) || $planet < 0 || !is_int($x) || $x < 0 || !is_int($y) || $y < 0 || !is_int($rm) || $rm < 0 || !is_int($terrain) || $terrain < 0 || !is_int($amount) || $amount < 0) {
-			echo <<<Alert
-			<div class="alert alert-warning alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert">
-					<span aria-hidden="true">&times;</span>
-					<span class="sr-only">Close</span>
-				</button>
-				<strong>Warning!</strong> Do not try to edit the page's markup to supply invalid input.
-			</div>
-Alert;
-		}
 		else {
 			$update = $mysqli->query("UPDATE {$tables["deposits"]} SET amount = {$amount}, rm = {$rm}, planet = {$planet}, terrain = {$terrain}, x = {$x}, y = {$y} WHERE id = {$deposit}");
 			echo <<<Alert

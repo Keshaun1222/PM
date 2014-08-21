@@ -1,6 +1,5 @@
 <?php
-	require("layout.php");
-	require("lib/others.class.php");
+	include("layout.php");
 	
 	head("View");
 	breadcrumb("View Deposit");
@@ -12,11 +11,11 @@
 				<select name="sector" id="sector" onchange="selectSystems(this.value)" style="width:200px">
 					<option value="">Select a Sector</option>
 					<?php
-						$sectors = Others::allSectors();
-						$count = count($sectors);
-						
-						for ($i = 0; $i < $count; $i++) {
-							echo $sectors[$i]->listOption();
+						$query = $mysqli->query("SELECT * FROM `{$tables["sectors"]}` ORDER BY `name`");
+						while ($result = $query->fetch_array()) {
+							echo <<<Option
+					<option value="{$result["id"]}">{$result["name"]}</option>
+Option;
 						}
 					?>
 				</select>
