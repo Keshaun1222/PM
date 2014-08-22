@@ -1,5 +1,6 @@
 <?php
-	include("layout.php");
+	require("layout.php");
+	require("lib/others.class.php");
 	
 	head("AddP");
 	breadcrumb("Add Planet");

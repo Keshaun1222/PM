@@ -18,6 +18,18 @@
 			$this->sector = $result["sector"];
 		}
 		
+		public function find($name) {
+			global $mysqli;
+			
+			$query = $mysqli->query("SELECT * FROM systems WHERE name = '{$name}'");
+			if ($query->num_rows != 0) {
+				$result = $query->fetch_array();
+				$this->id = $result["id"];
+				$this->name = $name;
+				$this->sector = $result["sector"];
+			}
+		}
+		
 		public function getName() {
 			return $this->name;
 		}

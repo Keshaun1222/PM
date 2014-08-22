@@ -1,10 +1,12 @@
 <?php
-	include("layout.php");
+	require("layout.php");
+	require("lib/others.class.php");
 	
 	head("Edit");
 	breadcrumb("Edit Deposit");
 	body();
-	$deposit = $_GET["deposit"];
+	$deposit = new Deposit;
+	$deposit->get($_GET["deposit"]);
 	
 	if (isset($_POST["submit"])) {
 		extract($_POST);
@@ -77,71 +79,66 @@ Alert;
 Alert;
 		}
 	}
-	
-	$dis = $mysqli->query("SELECT * FROM {$tables["deposits"]} WHERE id = {$deposit}");
-	$di = $dis->fetch_array();
-	$planets = $mysqli->query("SELECT * FROM {$tables["planets"]} WHERE id = {$di["planet"]}");
-	$planet = $planets->fetch_array();
-	$systems = $mysqli->query("SELECT * FROM {$tables["systems"]} WHERE id = {$planet["system"]}");
-	$system = $systems->fetch_array();
+	/*$planet = new Planet;
+	$planet->find($deposit->getPlanet());
+	$system = new System;
+	$system->find($planet->getSystem());
+	$sector = new Sector;
+	$sector->find($planet->getSector());*/
 ?>
 	<form class="form" role="form" action="edit.php?deposit=<?php echo $deposit; ?>" method="post">
 		<select name="sector" class="form-control" onchange="selectSystem(this.value)" autofocus>
 			<option value="">Select a Sector</option>
 			<?php
-				$query = $mysqli->query("SELECT * FROM `{$tables["sectors"]}` ORDER BY `name`");
-				while ($result = $query->fetch_array()) {
-					if ($result["id"] == $system["sector"]) {
-						echo <<<Option
-			<option value="{$result["id"]}" selected>{$result["name"]}</option>
-Option;
+				$sectors = Others::allSectors();
+				$count = count($sectors);
+				
+				for ($i = 0; $i < $count; $i++) {
+					if ($sectors[$i]->getName() == $sector->getName()) {
+						echo $sectors[$i]->listOptionSelected();
 					}
 					else {
-						echo <<<Option
-			<option value="{$result["id"]}">{$result["name"]}</option>
-Option;
+						echo $sectors[$i]->listOption();
 					}
 				}
 			?>
 		</select>
 		<select name="system" id="system" class="form-control o" onchange="selectPlanet(this.value)">
+			<option value="">Select a System</option>
 			<?php
-				$query = $mysqli->query("SELECT * FROM `{$tables["systems"]}` ORDER BY `name`");
-				while ($result = $query->fetch_array()) {
-					if ($result["id"] == $planet["system"]) {
-						echo <<<Option
-			<option value="{$result["id"]}" selected>{$result["name"]}</option>
-Option;
+				$systems = $sector->getSystems();
+				$count = count($systems);
+				
+				for ($i = 0; $i < $count; $i++) {
+					if ($systems[$i]->getName() == $system->getName()) {
+						echo $systems[$i]->listOptionSelected();
 					}
 					else {
-						echo <<<Option
-			<option value="{$result["id"]}">{$result["name"]}</option>
-Option;
+						echo $systems[$i]->listOption();
 					}
 				}
 			?>
 		</select>
 		<select name="planet" id="planet" class="form-control o" onchange="displayXY(this.value)">
+			<option value="">Select a Planet</option>
 			<?php
-				$query = $mysqli->query("SELECT * FROM `{$tables["planets"]}` ORDER BY `name`");
-				while ($result = $query->fetch_array()) {
-					if ($result["id"] == $di["planet"]) {
-						echo <<<Option
-			<option value="{$result["id"]}" selected>{$result["name"]}</option>
-Option;
+				$planets = $system->getPlanets();
+				$count = count($planets);
+				
+				for ($i = 0; $i < $count; $i++) {
+					if ($planets[$i]->getName() == $planet->getName()) {
+						echo $planets[$i]->listOptionSelected();
 					}
 					else {
-						echo <<<Option
-			<option value="{$result["id"]}">{$result["name"]}</option>
-Option;
+						echo $planets[$i]->listOption();
 					}
 				}
 			?>
 		</select>
 		<select name="x" id="x" class="form-control o">
 			<?php
-				for ($i = 0; $i < $planet["size"]; $i++) {
-					if ($i == $di["x"]) {
+				for ($i = 0; $i < $planet->getSize(); $i++) {
+					if ($i == $deposit->getX()) {
 						echo <<<Option
 			<option value="{$i}" selected>{$i}</option>
 Option;
@@ -156,8 +153,8 @@ Option;
 		</select>
 		<select name="y" id="y" class="form-control o">
 			<?php
-				for ($i = 0; $i < $planet["size"]; $i++) {
-					if ($i == $di["y"]) {
+				for ($i = 0; $i < $planet->getSize(); $i++) {
+					if ($i == $deposit->getY()) {
 						echo <<<Option
 			<option value="{$i}" selected>{$i}</option>
 Option;
@@ -170,21 +167,19 @@ Option;
 				}
 			?>
 		</select>
-		<input type="number" class="form-control o" placeholder="Amount" name="amount" value=<?php echo $di["amount"]; ?> min=0 required />
+		<input type="number" class="form-control o" placeholder="Amount" name="amount" value=<?php echo $deposit->getAmount(); ?> min=0 required />
 		<select name="rm" class="form-control o">
 			<option value="">Select a Resource Type</option>
 			<?php
-				$query = $mysqli->query("SELECT * FROM `{$tables["resources"]}` ORDER BY `name`");
-				while ($result = $query->fetch_array()) {
-					if ($result["id"] == $di["rm"]) {
-						echo <<<Option
-			<option value="{$result["id"]}" selected>{$result["name"]}</option>
-Option;
+				$rms = Others::allRMs();
+				$count = count($rms);
+				
+				for ($i = 0; $i < $count; $i++) {
+					if ($rms[$i]->getName() == $deposit->getRM()) {
+						echo $rms[$i]->listOptionSelected();
 					}
 					else {
-						echo <<<Option
-			<option value="{$result["id"]}">{$result["name"]}</option>
-Option;
+						echo $rms[$i]->listOption();
 					}
 				}
 			?>
@@ -192,17 +187,15 @@ Option;
 		<select name="terrain" class="form-control">
 			<option value="">Select a Terrain</option>
 			<?php
-				$query = $mysqli->query("SELECT * FROM `{$tables["terrain"]}` ORDER BY `name`");
-				while ($result = $query->fetch_array()) {
-					if ($result["id"] == $di["terrain"]) {
-						echo <<<Option
-			<option value="{$result["id"]}" selected>{$result["name"]}</option>
-Option;
+				$terrains = Others::allTerrains();
+				$count = count($terrains);
+				
+				for ($i = 0; $i < $count; $i++) {
+					if ($terrains[$i]->getName() == $deposit->getTerrain()) {
+						echo $terrains[$i]->listOptionSelected();
 					}
 					else {
-						echo <<<Option
-			<option value="{$result["id"]}">{$result["name"]}</option>
-Option;
+						echo $terrains[$i]->listOption();
 					}
 				}
 			?>

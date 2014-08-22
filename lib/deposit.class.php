@@ -91,6 +91,14 @@
 			return $terrain->getName();
 		}
 		
+		public function getX() {
+			return $this->x;
+		}
+		
+		public function getY() {
+			return $this->y;
+		}
+		
 		public function getCoords() {
 			$string = "{$this->x}, {$this->y}";
 			
@@ -104,6 +112,7 @@
 Render;
 			}
 			else {
+				$num = number_format($this->getAmount());
 				$string = <<<Render
 				<td title="{$this->x}, {$this->y}" style="background-image:url('img/terrain{$this->terrain}.gif'); background-size: 100% 100%;padding:0px !important;"><img onclick="$('#modal{$this->x}{$this->y}').modal();" src="img/deposit{$this->rm}.gif" /></td>
 				<div class="modal fade" id="modal{$this->x}{$this->y}" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -117,7 +126,7 @@ Render;
 								<h4 class="modal-title" id="ModalLabel">Deposit Information</h4>
 							</div>
 							<div class="modal-body">
-								<b>Deposit Size:</b> {$this->amount} units<br />
+								<b>Deposit Size:</b> {$num} units<br />
 								<b>RM Type:</b> {$this->getRM()}<br />
 								<b>Planet:</b> {$this->getPlanet()}<br />
 								<b>Location:</b> {$this->getCoords()}
