@@ -79,12 +79,12 @@ Alert;
 Alert;
 		}
 	}
-	/*$planet = new Planet;
+	$planet = new Planet;
 	$planet->find($deposit->getPlanet());
 	$system = new System;
 	$system->find($planet->getSystem());
 	$sector = new Sector;
-	$sector->find($planet->getSector());*/
+	$sector->find($planet->getSector());
 ?>
 	<form class="form" role="form" action="edit.php?deposit=<?php echo $deposit; ?>" method="post">
 		<select name="sector" class="form-control" onchange="selectSystem(this.value)" autofocus>
